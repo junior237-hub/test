@@ -13,7 +13,7 @@
        <div class="tilte"> formulaire d"inscription</div>
         <div class="row col-lg-6">
 
-             <form action="inscription_class.php" method="post">
+             <form action="router.php" method="post">
                <div class="form-group">
                   <label for="">nom</label>
                   <input type="text" class="form-control" name="nom">
@@ -31,7 +31,7 @@
                   <input type="password" class="form-control"name="pass">
                </div>
                <!-- <input type="submit" value="valider"> --> 
-               <button class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="submit">Sign in</button>
+               <button class="w-100 btn btn-lg btn-primary mt-3" type="submit" name="inscription">Sign in</button>
              </form>
         </div>
       </div>

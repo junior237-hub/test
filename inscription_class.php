@@ -1,50 +1,57 @@
-<?php  
-
-class inscription_class{
+<?php
+class inscription_class
+{
 
   private $nom;
   private $prenom;
   private $email;
   private $pass;
 
-   public function __construct( $Nom, $Prenom,  $Email, $Pass,$submit){
-      $this->nom=$Nom;
-      $this->prenom=$Prenom;
-      $this->email=$Email;
-      $this->pass=$Pass;
-      $this->submit=$submit;
-   }
+  public function __construct($Nom, $Prenom, $Email, $Pass)
+  {
+    $this->nom = $Nom;
+    $this->prenom = $Prenom;
+    $this->email = $Email;
+    $this->pass = $Pass;
+  }
+
+  public function inscription()
+  {
+
+    $sql = "INSERT INTO user(nom, prenom,email,pass)VALUES(?,?,?,?)";
+
     
-    public function inscription(){
+    require_once("class/connexion.php");
+    $pdo = new connexion();
+    $con= $pdo->connection();
+    $res = $con->prepare($sql);
+    $res->execute(array($this->nom  , $this->prenom ,$this->email,$this->pass));
+    header("location:index.php");
+  }
 
-      if(isset($_POST[$this->submit])){
-
-        if(isset($_POST[ $this->nom]) && isset($_POST[ $this->prenom])&& isset($_POST[  $this->email]) && isset($_POST[$this->pass])){
-            if(!empty($_POST[$this->nom]) && !empty($_POST[$this->nom]) && !empty($_POST[$this->nom]) && !empty($_POST[$this->nom]) ){
-                $nom=htmlspecialchars($_POST[$this->nom]);
-                $prenom=htmlspecialchars($_POST[$this->prenom]);
-                $email=htmlspecialchars($_POST[$this->email]);
-                $pass=sha1($_POST[$this->pass]);
-                
-               $sql="INSERT INTO user(nom, prenom,email,pass)VALUES(?,?,?,?)";
-               include_once('class/connexion.php');
-               $pdo=new connexion();
-               $pdo->connection();
-               $res=$pdo->prepare($sql);
-               $res->execute(array($nom,$prenom,$email,$pass));
-
-               header("lacation:index.php");
-            }
-
-        }
-      } 
-    }
+  public function lister(){
     
+    $sql="SELECT * FROM user";
+    require_once("class/connexion.php");
+    $pdo = new connexion();
+    $con= $pdo->connection();
+    $res=$con->prepare($sql);
+    $res->execute();
 
+   
+
+  }
+
+  public function supprimer($user_id){
+
+    $sql ="DELETE FROM user WHERE id_user=$user_id";
+    require_once("class/connexion.php");
+    $pdo = new connexion();
+    $con= $pdo->connection();
+    $res = $con->prepare($sql);
+    $res->execute(array($user_id));
+  }
 }
- 
- $obj =new inscription_class($nom,$prenom,$email,$pass);
- var_dump($obj);
- $obj->inscription();
- 
-  
+//  $obj=new inscription_class();
+//  $obj->supprimer($user_id);
+//  var_dump($user_id);

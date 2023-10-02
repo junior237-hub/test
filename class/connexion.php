@@ -8,10 +8,14 @@ class connexion{
  public function connection(){
     try {
         $pdo =new PDO($this->db,$this->user,$this->pass);
+        return $pdo;
        } catch (\PDOException $th) {
         echo "error de connexion".$th->getMessage();
        }
+       
  }
+
+
    
 }
 
