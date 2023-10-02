@@ -11,17 +11,16 @@
     <?php
 
 
-require_once("./inscription_class.php");
+// require_once("./inscription_class.php");
 
-$user= new inscription_class($nom, $prenom, $email);
+// $user= new inscription_class();
+// $user->lister(); 
 
-$user->lister(); 
-$user=$res->fetchAll(PDO::FETCH_ASSOC);
-    foreach($user as $clients){
-        echo $clients["nom"];
-        echo $clients["prenom"];
-        echo $clients["email"];
-    }
+//     foreach($user as $clients){
+//         echo $clients["nom"];
+//         echo $clients["prenom"];
+//         echo $clients["email"];
+//     }
    
     ?>
 </body>
