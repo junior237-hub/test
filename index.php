@@ -1,27 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>bienvenue sur notre espace membre</h1>
+<?php
+//fichier qui gère les redirections
+if (isset($_REQUEST["action"])) {
+  switch ($_REQUEST["action"]) {
+    case 'user':
+      require_once("src/controllers/UserController.php");
+      $userController = new UserController();
 
-    <?php
+      if (isset($_REQUEST["register"])) {
+        $user = [
+          "nom" => $_REQUEST["nom"],
+          "pass" => $_REQUEST["pass"],
+          "email" => $_REQUEST["email"],
+          "prenom" => $_REQUEST["prenom"],
+        ];
+        $userController->store($user);
+      }
+      break;
 
-
-// require_once("./inscription_class.php");
-
-// $user= new inscription_class();
-// $user->lister(); 
-
-//     foreach($user as $clients){
-//         echo $clients["nom"];
-//         echo $clients["prenom"];
-//         echo $clients["email"];
-//     }
-   
-    ?>
-</body>
-</html>
+    default:
+      /*** redirect to error page */
+      break;
+  }
+} else {
+  header("location: src/view/home.php");
+}
